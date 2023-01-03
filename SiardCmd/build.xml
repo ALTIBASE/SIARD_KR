@@ -117,6 +117,13 @@ Created    : 29.08.2016, Hartwig Thomas
 	<property name="jarcubridjdbc" value="cubrid.jar" />
 	<property name="jarjdbccubrid" value="jdbccubrid.jar" />
 	<property name="cpjdbccubrid" value="${dirlib}/${jarjdbccubrid};${dirlib}/${jarcubridjdbc}" />
+	<!-- jdbcaltibase jars -->
+	<property name="jaraltibasejdbc" value="Altibase.jar" />
+	<property name="jarjdbcaltibase" value="jdbcaltibase.jar" />
+	<property name="jarjdbcaltibasetest" value="jdbcaltibase-test.jar" />
+	<property name="jarsqlite" value="sqlite-jdbc-3.30.1.jar" />
+	<property name="cpjdbcaltibase" value="${dirlib}/${jarjdbcaltibase};${dirlib}/${jaraltibasejdbc}" />
+	<property name="cpjdbcaltibase-test" value="${dirlib}/${jarjdbcaltibasetest};${dirlib}/${jarsqlite}" />
 	<!-- siardapi -->
 	<property name="jarsiardapi" value="siardapi.jar" />
 	<property name="cpsiardapi" value="${dirlib}/${jarsiardapi}" />
@@ -318,6 +325,7 @@ Created    : 29.08.2016, Hartwig Thomas
 				<pathelement path="${cpjdbcoracle}" />
 				<pathelement path="${cpjdbcpostgres}" />
 				<pathelement path="${cpjdbccubrid}" />
+				<pathelement path="${cpjdbcaltibase}" />
 				<pathelement path="${cpjdbcbase}" />
 				<pathelement path="${cpenterutils}" />
 				<pathelement path="${cpjsch}" />
@@ -357,6 +365,8 @@ Created    : 29.08.2016, Hartwig Thomas
 				<pathelement path="${cpjdbcmssql-test}" />
 				<pathelement path="${cpjdbcmysql}" />
 				<pathelement path="${cpjdbcmysql-test}" />
+				<pathelement path="${cpjdbcaltibase}" />
+				<pathelement path="${cpjdbcaltibase-test}" />
 				<pathelement path="${cpjdbcoracle}" />
 				<pathelement path="${cpjdbcoracle-test}" />
 				<pathelement path="${cpjdbcpostgres}" />
@@ -540,7 +550,42 @@ Created    : 29.08.2016, Hartwig Thomas
     	-->
 	</target>
 
-	<!-- run Oracle tests -->
+	<!-- run Altibase tests -->
+	<property name="classaltibasetestsuite" value="ch.admin.bar.siard2.cmd._AltibaseTestSuite" />
+	<property name="filealtibasetests" value="altibase-tests" />
+	<target name="tests-altibase" depends="tests" if="dbuserAltibase">
+		<echo message="${ant.project.name}: test-altibase run" />
+		<!--
+		<junit haltonerror="true" haltonfailure="true" fork="true" printsummary="on" dir="${basedir}">
+			  <sysproperty key="java.util.logging.config.file" value="${diretc}/debug.properties"/>
+			  <formatter type="plain"/>
+			  <classpath>
+				<pathelement path="${dirbuildtests}"/>
+				<pathelement path="${dirdist}/${jarfile}"/>
+				<pathelement path="${cpantlr}"/>
+				<pathelement path="${cpenterutils}"/>
+				<pathelement path="${cpsqlparser}"/>
+				<pathelement path="${cpjts}"/>
+				<pathelement path="${cpjdbcbase}"/>
+				<pathelement path="${cpjdbcbase-test}"/>
+				<pathelement path="${cpjdbcaltibase}"/>
+				<pathelement path="${cpjdbcaltibase-test}"/>
+				<pathelement path="${cpjaxb}"/>
+				<pathelement path="${cpzip64}"/>
+				<pathelement path="${cpwoodstox}"/>
+				<pathelement path="${cpmsv}"/>
+				<pathelement path="${cpsiardapi}"/>
+				<pathelement path="${cpjunit}"/>
+				<pathelement path="${cpjsch}" />
+			  </classpath>
+			  <test name="${classaltibasetestsuite}"
+				  outfile="${filealtibasetests}"
+				  todir="${dirtmp}"/>
+		</junit>
+		-->
+</target>
+
+<!-- run Oracle tests -->
 	<property name="classoracletestsuite" value="ch.admin.bar.siard2.cmd._OracleTestSuite" />
 	<property name="fileoracletests" value="oracle-tests" />
 	<target name="tests-oracle" depends="tests" if="dbuseroracle">
